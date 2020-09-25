@@ -7,17 +7,17 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-16.04
+  quality-checks:
+    runs-on: ubuntu-latest
     name: Deploy Stacks
     env:
       AWS_REGION: eu-west-2
 
     steps:
-      - name: 'Checking out from GitHub'
+      - name: Check Out Repository
         uses: 'actions/checkout@v2'
 
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -31,7 +31,44 @@ jobs:
           path: node_modules
           key: v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: NPM install
+      - name: NPM Install
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm i
+
+      - name: Check Formatting
+        run: npm run prettier:check
+
+      - name: Lint
+        run: npm run lint:check
+
+      - name: Unit Test
+        run: npm run test
+
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Stacks
+    env:
+      AWS_REGION: eu-west-2
+
+    steps:
+      - name: Check Out Repository
+        uses: 'actions/checkout@v2'
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Restore node_modules
+        id: cache-node-modules
+        uses: actions/cache@master
+        with:
+          path: node_modules
+          key: v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: NPM Install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
 
