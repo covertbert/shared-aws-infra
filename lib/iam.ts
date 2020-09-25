@@ -14,6 +14,7 @@ export class IAMStack extends Stack {
     statement.addActions('cloudformation:GetTemplate')
     statement.addActions('cloudformation:CreateChangeSet')
     statement.addActions('cloudformation:DescribeChangeSet')
+    statement.addActions('cloudformation:ExecuteChangeSet')
     statement.addResources('*')
 
     const policy = new Policy(this, 'CloudformationDeploymentPolicy', {
