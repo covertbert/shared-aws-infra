@@ -1,0 +1,40 @@
+{
+  "name": "bertie-blackman-shared-aws-infra",
+  "version": "0.1.0",
+  "bin": {
+    "main": "bin/main.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "deploy": "npm run build && npm run cdk deploy",
+    "prettier:check": "prettier --check \"**/*.*\"",
+    "prettier:fix": "prettier --write \"**/*.*\"",
+    "lint:check": "eslint --ignore-path .gitignore . --ext ts --ext js",
+    "lint:fix": "eslint --fix --ignore-path .gitignore . --ext ts --ext js"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.64.0",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "aws-cdk": "1.64.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^8.1.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-budgets": "^1.64.0",
+    "@aws-cdk/aws-iam": "^1.64.0",
+    "@aws-cdk/core": "^1.64.0",
+    "source-map-support": "^0.5.16"
+  }
+}
