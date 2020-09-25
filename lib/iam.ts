@@ -8,18 +8,13 @@ export class IAMStack extends Stack {
     const role = new Role(this, 'CloudformationDeploymentRole', {
       assumedBy: new User(this, 'CloudformationDeploymentUser', {
         userName: 'CloudformationDeploymentUser',
-        managedPolicies: [
-          {
-            managedPolicyArn: 'arn:aws:iam::aws:policy/IAMSelfManageServiceSpecificCredentials',
-          },
-        ],
       }),
     })
 
     role.addToPolicy(
       new PolicyStatement({
         resources: ['*'],
-        actions: ['budgets:*'],
+        actions: ['cloudformation:DescribeStacks'],
       }),
     )
   }
