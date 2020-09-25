@@ -1,5 +1,5 @@
 {
-  "name": "bertie-blackman-shared-aws-infra",
+  "name": "bertie-blackman-shared-infra",
   "version": "0.1.0",
   "bin": {
     "main": "bin/main.js"
