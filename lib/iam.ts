@@ -5,16 +5,17 @@ export class IAMStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    const user = new User(this, 'CloudformationDeploymentUser', {
-      userName: 'CloudformationDeploymentUser',
+    const user = new User(this, 'StackDeploymentUser', {
+      userName: 'StackDeploymentUser',
     })
 
-    const statement = new PolicyStatement()
-    statement.addActions('cloudformation:*')
-    statement.addResources('*')
+    const stackDeploymentStatement = new PolicyStatement({
+      actions: ['cloudformation:*', 'budgets:*'],
+      resources: ['*'],
+    })
 
-    const policy = new Policy(this, 'CloudformationDeploymentPolicy', {
-      statements: [statement],
+    const policy = new Policy(this, 'StackDeploymentPolicy', {
+      statements: [stackDeploymentStatement],
     })
 
     policy.attachToUser(user)
