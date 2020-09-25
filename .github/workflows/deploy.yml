@@ -9,7 +9,7 @@ on:
 jobs:
   quality-checks:
     runs-on: ubuntu-latest
-    name: Deploy Stacks
+    name: Quality Checks
     env:
       AWS_REGION: eu-west-2
 
@@ -47,6 +47,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Stacks
+    needs: [quality-checks]
     env:
       AWS_REGION: eu-west-2
 
