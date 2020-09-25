@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
+    "test": "npm run build && jest",
     "cdk": "cdk",
     "deploy": "npm run build && npm run cdk deploy -- --require-approval never",
     "prettier:check": "prettier --check \"**/*.*\"",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@aws-cdk/aws-budgets": "^1.64.0",
+    "@aws-cdk/aws-cloudfront": "^1.64.0",
     "@aws-cdk/aws-iam": "^1.64.0",
     "@aws-cdk/aws-s3": "^1.64.0",
     "@aws-cdk/core": "^1.64.0",

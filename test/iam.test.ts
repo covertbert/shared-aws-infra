@@ -6,7 +6,7 @@ describe('IAMStack', () => {
   it('creates the correct CloudFormation template', () => {
     const app = new cdk.App()
 
-    const stack = new IAMStack(app, 'IAMStack')
+    const stack = new IAMStack(app, 'iam')
 
     const expectedResult = {
       Resources: {

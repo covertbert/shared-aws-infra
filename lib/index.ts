@@ -1,5 +1,5 @@
 import { BudgetsStack } from './budgets'
 import { IAMStack } from './iam'
-import { S3Stack } from './s3'
+import { StaticSiteStack } from './static-site'
 
-export { BudgetsStack, IAMStack, S3Stack }
+export { BudgetsStack, IAMStack, StaticSiteStack }

@@ -6,7 +6,7 @@ describe('BudgetsStack', () => {
   it('creates the correct CloudFormation template', () => {
     const app = new cdk.App()
 
-    const stack = new BudgetsStack(app, 'BudgetsStack')
+    const stack = new BudgetsStack(app, 'budgets')
 
     const expectedResult = {
       Resources: {
