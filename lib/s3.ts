@@ -6,7 +6,7 @@ export class S3Stack extends Stack {
     super(scope, id, props)
 
     new Bucket(this, 'BertieBlackmanBucket', {
-      bucketName: 'BertieBlackmanBucket',
+      bucketName: 'bertie-blackman-artifacts',
       lifecycleRules: [{ expiration: Duration.days(30) }],
     })
   }
