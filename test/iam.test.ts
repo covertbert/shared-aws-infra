@@ -1,4 +1,4 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert'
+import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
 import { IAMStack } from '../lib'
 
@@ -8,38 +8,26 @@ describe('IAMStack', () => {
 
     const stack = new IAMStack(app, 'iam')
 
-    const expectedResult = {
-      Resources: {
-        StackDeploymentUser07B4A228: {
-          Type: 'AWS::IAM::User',
-          Properties: {
-            UserName: 'StackDeploymentUser',
-          },
-        },
-        StackDeploymentPolicy9FFBB8D3: {
-          Type: 'AWS::IAM::Policy',
-          Properties: {
-            PolicyDocument: {
-              Statement: [
-                {
-                  Action: ['cloudformation:*', 'budgets:*', 's3:*', 'iam:*', 'cloudfront:*'],
-                  Effect: 'Allow',
-                  Resource: '*',
-                },
-              ],
-              Version: '2012-10-17',
+    expectCDK(stack).to(haveResource('AWS::IAM::User'))
+    expectCDK(stack).to(
+      haveResource('AWS::IAM::Policy', {
+        PolicyDocument: {
+          Statement: [
+            {
+              Action: ['cloudformation:*', 'budgets:*', 's3:*', 'iam:*', 'cloudfront:*'],
+              Effect: 'Allow',
+              Resource: '*',
             },
-            PolicyName: 'StackDeploymentPolicy9FFBB8D3',
-            Users: [
-              {
-                Ref: 'StackDeploymentUser07B4A228',
-              },
-            ],
-          },
+          ],
+          Version: '2012-10-17',
         },
-      },
-    }
-
-    expectCDK(stack).to(matchTemplate(expectedResult, MatchStyle.EXACT))
+        PolicyName: 'StackDeploymentPolicy9FFBB8D3',
+        Users: [
+          {
+            Ref: 'StackDeploymentUser07B4A228',
+          },
+        ],
+      }),
+    )
   })
 })

@@ -1,4 +1,4 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert'
+import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
 import { BudgetsStack } from '../lib'
 
@@ -8,41 +8,18 @@ describe('BudgetsStack', () => {
 
     const stack = new BudgetsStack(app, 'budgets')
 
-    const expectedResult = {
-      Resources: {
-        CostBudget: {
-          Type: 'AWS::Budgets::Budget',
-          Properties: {
-            Budget: {
-              BudgetLimit: {
-                Amount: 20,
-                Unit: 'USD',
-              },
-              BudgetName: 'CostBudget',
-              BudgetType: 'COST',
-              TimeUnit: 'MONTHLY',
-            },
-            NotificationsWithSubscribers: [
-              {
-                Notification: {
-                  ComparisonOperator: 'GREATER_THAN',
-                  NotificationType: 'FORECASTED',
-                  Threshold: 90,
-                  ThresholdType: 'PERCENTAGE',
-                },
-                Subscribers: [
-                  {
-                    Address: 'blackmangh@gmail.com',
-                    SubscriptionType: 'EMAIL',
-                  },
-                ],
-              },
-            ],
+    expectCDK(stack).to(
+      haveResource('AWS::Budgets::Budget', {
+        Budget: {
+          BudgetLimit: {
+            Amount: 20,
+            Unit: 'USD',
           },
+          BudgetName: 'CostBudget',
+          BudgetType: 'COST',
+          TimeUnit: 'MONTHLY',
         },
-      },
-    }
-
-    expectCDK(stack).to(matchTemplate(expectedResult, MatchStyle.EXACT))
+      }),
+    )
   })
 })

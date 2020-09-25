@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@aws-cdk/aws-budgets": "^1.64.0",
+    "@aws-cdk/aws-certificatemanager": "^1.64.0",
     "@aws-cdk/aws-cloudfront": "^1.64.0",
     "@aws-cdk/aws-iam": "^1.64.0",
     "@aws-cdk/aws-s3": "^1.64.0",
