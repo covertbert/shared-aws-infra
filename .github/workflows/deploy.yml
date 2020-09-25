@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-16.04
-    name: Deploy IAM Stack
+    name: Deploy Stacks
     env:
       AWS_REGION: eu-west-2
 
@@ -35,5 +35,8 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
 
-      - name: Deploy IAM stack
+      - name: Deploy IAMStack
         run: npm run deploy IAMStack
+
+      - name: Deploy BudgetsStack
+        run: npm run deploy BudgetsStack
