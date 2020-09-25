@@ -22,7 +22,7 @@ describe('IAMStack', () => {
             PolicyDocument: {
               Statement: [
                 {
-                  Action: ['cloudformation:*', 'budgets:*', 's3:*'],
+                  Action: ['cloudformation:*', 'budgets:*', 's3:*', 'iam:*'],
                   Effect: 'Allow',
                   Resource: '*',
                 },
