@@ -78,3 +78,6 @@ jobs:
 
       - name: Deploy BudgetsStack
         run: npm run deploy BudgetsStack
+
+      - name: Deploy S3Stack
+        run: npm run deploy S3Stack
