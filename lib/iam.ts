@@ -10,7 +10,7 @@ export class IAMStack extends Stack {
     })
 
     const stackDeploymentStatement = new PolicyStatement({
-      actions: ['cloudformation:*', 'budgets:*'],
+      actions: ['cloudformation:*', 'budgets:*', 's3:*'],
       resources: ['*'],
     })
 
