@@ -1,6 +1,7 @@
 *.js
 !jest.config.js
 !.eslintrc.js
+!lint-staged.config.js
 *.d.ts
 node_modules
 
