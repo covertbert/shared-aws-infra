@@ -1,21 +1,23 @@
 import { Stack, App, StackProps } from '@aws-cdk/core'
-import { User, PolicyStatement, Role } from '@aws-cdk/aws-iam'
+import { User, Policy, PolicyStatement } from '@aws-cdk/aws-iam'
 
 export class IAMStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    const role = new Role(this, 'CloudformationDeploymentRole', {
-      assumedBy: new User(this, 'CloudformationDeploymentUser', {
-        userName: 'CloudformationDeploymentUser',
-      }),
+    const user = new User(this, 'CloudformationDeploymentUser', {
+      userName: 'CloudformationDeploymentUser',
     })
 
-    role.addToPolicy(
-      new PolicyStatement({
-        resources: ['*'],
-        actions: ['cloudformation:DescribeStacks'],
-      }),
-    )
+    const statement = new PolicyStatement()
+    statement.addActions('cloudformation:DescribeStacks')
+    statement.addActions('cloudformation:GetTemplate')
+    statement.addResources('*')
+
+    const policy = new Policy(this, 'CloudformationDeploymentPolicy', {
+      statements: [statement],
+    })
+
+    policy.attachToUser(user)
   }
 }
