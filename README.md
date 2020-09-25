@@ -1,5 +1,7 @@
 # Shared AWS Infrastructure
 
+![Deploy](https://github.com/covertbert/covertbert-bertie-blackman-shared-infra/workflows/Deploy/badge.svg)
+
 This repo is for shared AWS infrastructure provisioned using the AWS SDK
 
 ## Info
