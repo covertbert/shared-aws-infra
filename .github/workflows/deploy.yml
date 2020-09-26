@@ -72,5 +72,8 @@ jobs:
       - name: Deploy budgets
         run: npm run deploy budgets
 
+      - name: Deploy certificates
+        run: npm run deploy certificates
+
       - name: Deploy bertie-blackman
         run: npm run deploy bertie-blackman
