@@ -27,5 +27,21 @@ describe('Route53Stack', () => {
         },
       }),
     )
+
+    expectCDK(stack).to(
+      haveResource('AWS::Route53::RecordSet', {
+        Name: 'bertie.dev.',
+        Type: 'A',
+        AliasTarget: {
+          DNSName: 'www.bertie.dev',
+          HostedZoneId: {
+            Ref: 'BertieDevZone2892EEB1',
+          },
+        },
+        HostedZoneId: {
+          Ref: 'BertieDevZone2892EEB1',
+        },
+      }),
+    )
   })
 })

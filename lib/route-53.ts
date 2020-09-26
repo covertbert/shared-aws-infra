@@ -22,5 +22,16 @@ export class Route53Stack extends Stack {
       zone: hostedZone,
       recordName: 'www.bertie.dev',
     })
+
+    new ARecord(this, 'NakedBertieDevARecord', {
+      target: AddressRecordTarget.fromAlias({
+        bind: (): AliasRecordTargetConfig => ({
+          dnsName: 'www.bertie.dev',
+          hostedZoneId: hostedZone.hostedZoneId,
+        }),
+      }),
+      zone: hostedZone,
+      recordName: 'bertie.dev',
+    })
   }
 }
