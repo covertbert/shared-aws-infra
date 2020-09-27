@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - refactor-ci
+      - main
 
 jobs:
   deploy-stacks-cdk:
