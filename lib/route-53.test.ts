@@ -1,6 +1,6 @@
 import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
-import { Route53Stack } from '.'
+import { Route53Stack } from './route-53'
 
 describe('Route53Stack', () => {
   it('creates the correct CloudFormation template', () => {
