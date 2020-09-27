@@ -7,34 +7,6 @@ on:
       - main
 
 jobs:
-  quality-checks:
-    runs-on: ubuntu-latest
-    name: Quality Checks
-
-    steps:
-      - name: Check Out Repository
-        uses: 'actions/checkout@v2'
-
-      - name: Restore node_modules
-        id: cache-node-modules
-        uses: actions/cache@master
-        with:
-          path: node_modules
-          key: v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-      - name: NPM Install
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm i
-
-      - name: Check Formatting
-        run: npm run prettier:check
-
-      - name: Lint
-        run: npm run lint:check
-
-      - name: Unit Test
-        run: npm run test
-
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Stacks
