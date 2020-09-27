@@ -2,8 +2,8 @@ name: Branch
 
 on:
   push:
-    branches:
-      - '!main'
+    branches-ignore:
+      - 'main'
 
 jobs:
   quality-checks:
