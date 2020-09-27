@@ -16,7 +16,7 @@
     "lint:fix": "eslint --fix --ignore-path .gitignore . --ext ts --ext js"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.64.0",
+    "@aws-cdk/assert": "1.64.1",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
@@ -34,14 +34,14 @@
     "typescript": "~4.0.3"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.64.0",
-    "@aws-cdk/aws-certificatemanager": "1.64.0",
-    "@aws-cdk/aws-cloudfront": "1.64.0",
-    "@aws-cdk/aws-iam": "1.64.0",
-    "@aws-cdk/aws-s3": "1.64.0",
-    "@aws-cdk/aws-ses": "1.64.0",
-    "@aws-cdk/aws-ses-actions": "1.64.0",
-    "@aws-cdk/core": "1.64.0",
+    "@aws-cdk/aws-budgets": "1.64.1",
+    "@aws-cdk/aws-certificatemanager": "1.64.1",
+    "@aws-cdk/aws-cloudfront": "1.64.1",
+    "@aws-cdk/aws-iam": "1.64.1",
+    "@aws-cdk/aws-s3": "1.64.1",
+    "@aws-cdk/aws-ses": "1.64.1",
+    "@aws-cdk/aws-ses-actions": "1.64.1",
+    "@aws-cdk/core": "1.64.1",
     "source-map-support": "^0.5.16"
   }
 }
