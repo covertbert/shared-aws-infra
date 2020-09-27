@@ -7,9 +7,9 @@ on:
       - refactor-ci
 
 jobs:
-  deploy:
+  deploy-stacks:
     runs-on: ubuntu-latest
-    name: Deploy ${{ matrix.stack }}
+    name: Deploy Stack '${{ matrix.stack }}'
     strategy:
       matrix:
         stack: [iam, budgets, certificates, route-53, bertie-blackman]
@@ -41,21 +41,14 @@ jobs:
       - name: Deploy ${{ matrix.stack }}
         run: npm run deploy ${{ matrix.stack }}
 
-      # - name: Deploy budgets
-      #   run: npm run deploy budgets
+  deploy-ses:
+    runs-on: ubuntu-latest
+    name: Deploy Stack 'bertie-blackman-ses'
 
-      # - name: Deploy certificates
-      #   run: npm run deploy certificates
-
-      # - name: Deploy route-53
-      #   run: npm run deploy route-53
-
-      # - name: Deploy bertie-blackman
-      #   run: npm run deploy bertie-blackman
-
-      # - name: Deploy bertie-blackman-ses
-      #   env:
-      #     AWS_DEFAULT_REGION: us-east-1
-      #   run: |
-      #     npm run deploy bertie-blackman-ses
-      #     aws ses set-active-receipt-rule-set --rule-set-name 'bertie-blackman-ses-rule-set'
+    steps:
+      - name: Deploy bertie-blackman-ses
+        env:
+          AWS_DEFAULT_REGION: us-east-1
+        run: |
+          npm run deploy bertie-blackman-ses
+          aws ses set-active-receipt-rule-set --rule-set-name 'bertie-blackman-ses-rule-set'
