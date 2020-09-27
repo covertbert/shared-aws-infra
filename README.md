@@ -2,18 +2,12 @@
 
 ![Deploy](https://github.com/covertbert/covertbert-bertie-blackman-shared-infra/workflows/Deploy/badge.svg)
 
-This repo is for shared AWS infrastructure provisioned using the AWS SDK
+This repo is for my shared AWS infrastructure, written in TypeScript & using the AWS CDK.
 
-## Info
+## Getting started
 
-The `cdk.json` file tells the CDK Toolkit how to execute the app.
+Available stacks can be found in `bin/main.ts`.
 
-## Useful commands
-
-- `cdk deploy` deploy this stack to your default AWS account/region
-- `cdk diff` compare deployed stack with current state
-- `cdk synth` emits the synthesized CloudFormation template
-- `npm run build` compile typescript to js
-- `npm run watch` watch for changes and compile
-- `npm run test` perform the jest unit tests
-- `npm run deploy` compiles typescript and runs `cdk deploy`
+- `npm install` to install dependencies
+- `npm run synth <stack-name>` to see a simulated output of the specified stack
+- `npm run deploy <stack-name>` to deploy a specific stack
