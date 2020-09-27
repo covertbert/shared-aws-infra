@@ -49,3 +49,10 @@ jobs:
 
       - name: Deploy bertie-blackman
         run: npm run deploy bertie-blackman
+
+      - name: Deploy bertie-blackman-ses
+        env:
+          AWS_DEFAULT_REGION: us-east-1
+        run: |
+          npm run deploy bertie-blackman-ses
+          aws ses set-active-receipt-rule-set --rule-set-name 'bertie-blackman-ses-rule-set'
