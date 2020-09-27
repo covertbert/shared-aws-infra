@@ -22,6 +22,7 @@ describe('IAMStack', () => {
                 'cloudfront:*',
                 'acm:*',
                 'route53:*',
+                'ses:*',
               ],
               Effect: 'Allow',
               Resource: '*',

@@ -18,6 +18,7 @@ export class IAMStack extends Stack {
         'cloudfront:*',
         'acm:*',
         'route53:*',
+        'ses:*',
       ],
       resources: ['*'],
     })
