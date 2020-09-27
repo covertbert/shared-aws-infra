@@ -10,7 +10,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Stacks
-    needs: [quality-checks]
     env:
       AWS_REGION: eu-west-2
 
