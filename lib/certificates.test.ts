@@ -1,6 +1,6 @@
 import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
-import { CertificatesStack } from '../lib'
+import { CertificatesStack } from './certificates'
 
 describe('CertificatesStack', () => {
   it('creates a CloudFormation template with the correct resources', () => {

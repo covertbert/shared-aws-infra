@@ -2,6 +2,7 @@
 !jest.config.js
 !.eslintrc.js
 !lint-staged.config.js
+!.huskyrc.js
 *.d.ts
 node_modules
 

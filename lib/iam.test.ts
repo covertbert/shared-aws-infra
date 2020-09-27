@@ -1,6 +1,6 @@
 import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
-import { IAMStack } from '../lib'
+import { IAMStack } from './iam'
 
 describe('IAMStack', () => {
   it('creates the correct CloudFormation template', () => {
