@@ -2,7 +2,7 @@
   "name": "bertie-blackman-shared-infra",
   "version": "0.1.0",
   "bin": {
-    "main": "bin/main.js"
+    "main": "bin/main.ts"
   },
   "scripts": {
     "build": "tsc",

@@ -10,8 +10,6 @@ jobs:
   quality-checks:
     runs-on: ubuntu-latest
     name: Quality Checks
-    env:
-      AWS_REGION: eu-west-2
 
     steps:
       - name: Check Out Repository
