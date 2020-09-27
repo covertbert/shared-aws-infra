@@ -7,9 +7,12 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy-stacks-cdk:
     runs-on: ubuntu-latest
-    name: Deploy Stacks
+    name: Deploy Stack '${{ matrix.stack }}' via CDK
+    strategy:
+      matrix:
+        stack: [iam, budgets, certificates, route-53, bertie-blackman, bertie-blackman-ses]
     env:
       AWS_REGION: eu-west-2
 
@@ -35,24 +38,21 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
 
-      - name: Deploy iam
-        run: npm run deploy iam
+      - name: Deploy ${{ matrix.stack }}
+        run: npm run deploy ${{ matrix.stack }}
 
-      - name: Deploy budgets
-        run: npm run deploy budgets
+  deploy-aws-cli:
+    runs-on: ubuntu-latest
+    name: Deploy via CLI
 
-      - name: Deploy certificates
-        run: npm run deploy certificates
-
-      - name: Deploy route-53
-        run: npm run deploy route-53
-
-      - name: Deploy bertie-blackman
-        run: npm run deploy bertie-blackman
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Deploy bertie-blackman-ses
-        env:
-          AWS_DEFAULT_REGION: us-east-1
         run: |
-          npm run deploy bertie-blackman-ses
           aws ses set-active-receipt-rule-set --rule-set-name 'bertie-blackman-ses-rule-set'
