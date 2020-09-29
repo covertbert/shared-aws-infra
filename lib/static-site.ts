@@ -12,6 +12,7 @@ import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets'
 type ExtendedStackProps = StackProps & {
   recordName: string
   domainName: string
+  certificateARN: string
 }
 export class StaticSiteStack extends Stack {
   constructor(scope: App, id: string, props: ExtendedStackProps) {
@@ -19,7 +20,7 @@ export class StaticSiteStack extends Stack {
 
     const WEBSITE_NAME = id
     const ARTIFACT_BUCKET_NAME = `${WEBSITE_NAME}-artifacts`
-    const { recordName, domainName } = props
+    const { recordName, domainName, certificateARN } = props
     const fullApexDomain = [recordName, domainName].join('.')
 
     const websiteBucket = new Bucket(this, ARTIFACT_BUCKET_NAME, {
@@ -35,8 +36,7 @@ export class StaticSiteStack extends Stack {
 
     const cloudfrontDistProps: CloudFrontWebDistributionProps = {
       aliasConfiguration: {
-        acmCertRef:
-          'arn:aws:acm:us-east-1:515213366596:certificate/904b7400-ca9a-4f45-8f77-91deccfd79c1',
+        acmCertRef: certificateARN,
         names: [domainName, fullApexDomain],
       },
       originConfigs: [
