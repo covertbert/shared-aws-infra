@@ -34,6 +34,16 @@ export class StaticSiteStack extends Stack {
       comment: `CloudFront OAI for ${WEBSITE_NAME}`,
     })
 
+    const cloudfrontS3Access = new PolicyStatement({
+      actions: ['s3:GetBucket*', 's3:GetObject*', 's3:List*'],
+      resources: [websiteBucket.bucketArn, `${websiteBucket.bucketArn}/*`],
+      principals: [
+        new CanonicalUserPrincipal(cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId),
+      ],
+    })
+
+    websiteBucket.addToResourcePolicy(cloudfrontS3Access)
+
     const cloudfrontDistProps: CloudFrontWebDistributionProps = {
       aliasConfiguration: {
         acmCertRef: certificateARN,
@@ -58,7 +68,7 @@ export class StaticSiteStack extends Stack {
 
     const hostedZone = new PublicHostedZone(this, 'BertieDevZone', { zoneName: domainName })
 
-    new ARecord(this, 'WWWBertieDevARecord', {
+    const www = new ARecord(this, 'WWWBertieDevARecord', {
       target: RecordTarget.fromAlias(new CloudFrontTarget(cloudfrontDist)),
       zone: hostedZone,
       recordName: fullApexDomain,
@@ -70,19 +80,14 @@ export class StaticSiteStack extends Stack {
       recordName: domainName,
     })
 
-    const cloudfrontS3Access = new PolicyStatement({
-      actions: ['s3:GetBucket*', 's3:GetObject*', 's3:List*'],
-      resources: [websiteBucket.bucketArn, `${websiteBucket.bucketArn}/*`],
-      principals: [
-        new CanonicalUserPrincipal(cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId),
-      ],
-    })
-
-    websiteBucket.addToResourcePolicy(cloudfrontS3Access)
-
     new CfnOutput(this, 'cloudfront-url', {
       exportName: 'CloudfrontURL',
       value: cloudfrontDist.distributionDomainName,
+    })
+
+    new CfnOutput(this, 'www-url', {
+      exportName: 'wwwURL',
+      value: www.domainName,
     })
   }
 }
