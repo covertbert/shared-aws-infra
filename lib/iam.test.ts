@@ -1,16 +1,22 @@
-import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
+import { expect as expectCDK, haveResourceLike } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
 import { IAMStack } from './iam'
 
 describe('IAMStack', () => {
-  it('creates the correct CloudFormation template', () => {
-    const app = new cdk.App()
+  const app = new cdk.App()
+  const stack = new IAMStack(app, 'iam')
 
-    const stack = new IAMStack(app, 'iam')
-
-    expectCDK(stack).to(haveResource('AWS::IAM::User'))
+  it('creates a stack deployment IAM user', () => {
     expectCDK(stack).to(
-      haveResource('AWS::IAM::Policy', {
+      haveResourceLike('AWS::IAM::User', {
+        UserName: 'StackDeploymentUser',
+      }),
+    )
+  })
+
+  it('creates an IAM policy with the correct actions', () => {
+    expectCDK(stack).to(
+      haveResourceLike('AWS::IAM::Policy', {
         PolicyDocument: {
           Statement: [
             {
@@ -25,18 +31,9 @@ describe('IAMStack', () => {
                 'ses:*',
                 'sns:*',
               ],
-              Effect: 'Allow',
-              Resource: '*',
             },
           ],
-          Version: '2012-10-17',
         },
-        PolicyName: 'StackDeploymentPolicy9FFBB8D3',
-        Users: [
-          {
-            Ref: 'StackDeploymentUser07B4A228',
-          },
-        ],
       }),
     )
   })

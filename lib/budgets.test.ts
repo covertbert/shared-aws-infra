@@ -3,11 +3,10 @@ import * as cdk from '@aws-cdk/core'
 import { BudgetsStack } from './budgets'
 
 describe('BudgetsStack', () => {
-  it('creates the correct CloudFormation template', () => {
-    const app = new cdk.App()
+  const app = new cdk.App()
+  const stack = new BudgetsStack(app, 'budgets')
 
-    const stack = new BudgetsStack(app, 'budgets')
-
+  it('creates a 20USD budget', () => {
     expectCDK(stack).to(
       haveResource('AWS::Budgets::Budget', {
         Budget: {
