@@ -1,4 +1,4 @@
-import { Stack, App, StackProps, RemovalPolicy, CfnOutput } from '@aws-cdk/core'
+import { Stack, App, StackProps, RemovalPolicy, CfnOutput, Duration } from '@aws-cdk/core'
 import { Bucket } from '@aws-cdk/aws-s3'
 import {
   OriginAccessIdentity,
@@ -6,7 +6,7 @@ import {
   CloudFrontWebDistribution,
 } from '@aws-cdk/aws-cloudfront'
 import { PolicyStatement, CanonicalUserPrincipal } from '@aws-cdk/aws-iam'
-import { ARecord, RecordTarget, PublicHostedZone } from '@aws-cdk/aws-route53'
+import { ARecord, AaaaRecord, RecordTarget, PublicHostedZone } from '@aws-cdk/aws-route53'
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets'
 
 type ExtendedStackProps = StackProps & {
@@ -72,12 +72,21 @@ export class StaticSiteStack extends Stack {
       target: RecordTarget.fromAlias(new CloudFrontTarget(cloudfrontDist)),
       zone: hostedZone,
       recordName: fullApexDomain,
+      ttl: Duration.seconds(60),
     })
 
     new ARecord(this, 'NakedBertieDevARecord', {
       target: RecordTarget.fromAlias(new CloudFrontTarget(cloudfrontDist)),
       zone: hostedZone,
       recordName: domainName,
+      ttl: Duration.seconds(60),
+    })
+
+    new AaaaRecord(this, 'NakedBertieDevAAARecord', {
+      target: RecordTarget.fromAlias(new CloudFrontTarget(cloudfrontDist)),
+      zone: hostedZone,
+      recordName: domainName,
+      ttl: Duration.seconds(60),
     })
 
     new CfnOutput(this, 'cloudfront-url', {
