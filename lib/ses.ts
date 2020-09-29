@@ -5,17 +5,21 @@ import { Bucket } from '@aws-cdk/aws-s3'
 import { Topic } from '@aws-cdk/aws-sns'
 import { EmailSubscription } from '@aws-cdk/aws-sns-subscriptions'
 
+type ExtendedProps = StackProps & {
+  forwardingAddress: string
+}
+
 export class SESStack extends Stack {
-  constructor(scope: App, id: string, props?: StackProps) {
+  constructor(scope: App, id: string, props: ExtendedProps) {
     super(scope, id, props)
 
     const BUCKET_NAME = `${id}-emails`
 
     const emailForwardingTopic = new Topic(this, 'EmailForwarding', {
       displayName: 'EmailForwarding',
-      topicName: 'bertie-blackman-email-forwarding',
+      topicName: `${id}-email-forwarding`,
     })
-    emailForwardingTopic.addSubscription(new EmailSubscription('blackmanrgh@gmail.com'))
+    emailForwardingTopic.addSubscription(new EmailSubscription(props.forwardingAddress))
 
     const bucket = new Bucket(this, 'SESBucket', {
       bucketName: BUCKET_NAME,

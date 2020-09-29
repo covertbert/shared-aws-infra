@@ -19,6 +19,7 @@ export class IAMStack extends Stack {
         'acm:*',
         'route53:*',
         'ses:*',
+        'sns:*',
       ],
       resources: ['*'],
     })
