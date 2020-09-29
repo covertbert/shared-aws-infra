@@ -2,9 +2,9 @@ version: 1
 
 merge:
   whitelist:
-    labels: ['dependencies']
+    labels: ['dependencies', 'auto-merge']
   method: squash
 
 update:
   whitelist:
-    labels: ['dependencies']
+    labels: ['dependencies', 'auto-merge']
