@@ -23,6 +23,7 @@ describe('IAMStack', () => {
                 'acm:*',
                 'route53:*',
                 'ses:*',
+                'sns:*',
               ],
               Effect: 'Allow',
               Resource: '*',
