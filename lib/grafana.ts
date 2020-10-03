@@ -12,17 +12,13 @@ import {
 
 type ExtendedStackProps = StackProps & {
   name: string
-  vpcID: string
-  subnets: string[]
 }
 
 export class GrafanaStack extends Stack {
   constructor(scope: App, id: string, props: ExtendedStackProps) {
     super(scope, id, props)
 
-    const { name, vpcID, subnets } = props
-
-    console.log(name, vpcID, subnets)
+    const { name } = props
 
     const logGroup = new LogGroup(this, `${name}-log-group`, {
       logGroupName: '/ecs/grafana-fargate',

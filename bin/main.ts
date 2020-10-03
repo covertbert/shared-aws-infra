@@ -37,6 +37,4 @@ new SESStack(app, 'bertie-blackman-ses', {
 new GrafanaStack(app, 'grafana-stack-main', {
   env: { region: regions.primary },
   name: 'grafana-dashboard',
-  vpcID: '',
-  subnets: [],
 })
