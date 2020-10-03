@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 import 'source-map-support/register'
 import * as cdk from '@aws-cdk/core'
-import { BudgetsStack, IAMStack, StaticSiteStack, CertificatesStack, SESStack } from '../lib'
+import {
+  BudgetsStack,
+  IAMStack,
+  StaticSiteStack,
+  CertificatesStack,
+  SESStack,
+  GrafanaStack,
+} from '../lib'
 
 const regions = {
   primary: 'eu-west-2',
@@ -13,6 +20,7 @@ const app = new cdk.App()
 new BudgetsStack(app, 'budgets', { env: { region: regions.primary } })
 new IAMStack(app, 'iam', { env: { region: regions.primary } })
 new CertificatesStack(app, 'certificates', { env: { region: regions.secondary } })
+
 new StaticSiteStack(app, 'bertie-blackman', {
   env: { region: regions.primary },
   recordName: 'www',
@@ -20,7 +28,15 @@ new StaticSiteStack(app, 'bertie-blackman', {
   certificateARN:
     'arn:aws:acm:us-east-1:515213366596:certificate/904b7400-ca9a-4f45-8f77-91deccfd79c1',
 })
+
 new SESStack(app, 'bertie-blackman-ses', {
   env: { region: regions.secondary },
   forwardingAddress: 'blackmanrgh@gmail.com',
+})
+
+new GrafanaStack(app, 'grafana-stack-main', {
+  env: { region: regions.primary },
+  name: 'grafana-dashboard',
+  vpcID: '',
+  subnets: [],
 })
