@@ -1,7 +1,7 @@
 import { Stack, App, StackProps } from '@aws-cdk/core'
 import { ReceiptRuleSet } from '@aws-cdk/aws-ses'
 import { S3, Sns, EmailEncoding } from '@aws-cdk/aws-ses-actions'
-import { Bucket } from '@aws-cdk/aws-s3'
+import { Bucket, BlockPublicAccess, BucketEncryption } from '@aws-cdk/aws-s3'
 import { Topic } from '@aws-cdk/aws-sns'
 import { EmailSubscription } from '@aws-cdk/aws-sns-subscriptions'
 
@@ -23,6 +23,8 @@ export class SESStack extends Stack {
 
     const bucket = new Bucket(this, 'SESBucket', {
       bucketName: BUCKET_NAME,
+      blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+      encryption: BucketEncryption.S3_MANAGED,
     })
 
     new ReceiptRuleSet(this, 'SESRuleSet', {
