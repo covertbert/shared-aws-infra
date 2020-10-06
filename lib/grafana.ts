@@ -1,4 +1,4 @@
-import { Stack, App, StackProps } from '@aws-cdk/core'
+import { Stack, App, StackProps, RemovalPolicy } from '@aws-cdk/core'
 import { LogGroup } from '@aws-cdk/aws-logs'
 import {
   Cluster,
@@ -22,6 +22,7 @@ export class GrafanaStack extends Stack {
 
     const logGroup = new LogGroup(this, `${name}-log-group`, {
       logGroupName: '/ecs/grafana-fargate',
+      removalPolicy: RemovalPolicy.DESTROY,
     })
 
     const ecsCluster = new Cluster(this, `${name}-fargate-cluster`, {
