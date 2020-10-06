@@ -1,5 +1,5 @@
 import { Stack, App, StackProps, RemovalPolicy, CfnOutput, Duration } from '@aws-cdk/core'
-import { Bucket } from '@aws-cdk/aws-s3'
+import { Bucket, BlockPublicAccess, BucketEncryption } from '@aws-cdk/aws-s3'
 import {
   OriginAccessIdentity,
   CloudFrontWebDistributionProps,
@@ -28,6 +28,8 @@ export class StaticSiteStack extends Stack {
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'index.html',
       removalPolicy: RemovalPolicy.DESTROY,
+      blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+      encryption: BucketEncryption.S3_MANAGED,
     })
 
     const cloudfrontOAI = new OriginAccessIdentity(this, 'OAI', {
