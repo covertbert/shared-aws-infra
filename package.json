@@ -16,7 +16,7 @@
     "lint:fix": "eslint --fix --ignore-path .gitignore . --ext ts --ext js"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.64.1",
+    "@aws-cdk/assert": "1.70.0",
     "@types/jest": "^26.0.15",
     "@types/node": "14.14.5",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
