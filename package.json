@@ -10,6 +10,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "deploy": "cdk deploy --require-approval never",
+    "destroy": "cdk destroy",
     "synth": "cdk synth ",
     "prettier:check": "prettier --check \"**/*.*\"",
     "prettier:fix": "prettier --write \"**/*.*\"",

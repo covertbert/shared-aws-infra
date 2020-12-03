@@ -45,7 +45,7 @@ jobs:
 
     strategy:
       matrix:
-        stack: [iam, budgets, certificates, bertie-blackman, bertie-blackman-ses]
+        stack: [iam, budgets, certificates, bertie-blackman, bertie-blackman-ses, ec2]
     env:
       AWS_REGION: eu-west-2
 

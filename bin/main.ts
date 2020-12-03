@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 import 'source-map-support/register'
 import * as cdk from '@aws-cdk/core'
-import { BudgetsStack, IAMStack, StaticSiteStack, CertificatesStack, SESStack } from '../lib'
+import {
+  BudgetsStack,
+  IAMStack,
+  StaticSiteStack,
+  CertificatesStack,
+  SESStack,
+  EC2Stack,
+} from '../lib'
 
 const regions = {
   primary: 'eu-west-2',
@@ -24,3 +31,5 @@ new SESStack(app, 'bertie-blackman-ses', {
   env: { region: regions.secondary },
   forwardingAddress: 'blackmanrgh@gmail.com',
 })
+
+new EC2Stack(app, 'ec2', { env: { region: regions.primary } })
