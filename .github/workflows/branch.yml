@@ -26,13 +26,13 @@ jobs:
         run: npm i
 
       - name: Check Formatting
-        run: npm run prettier:check
+        run: yarn prettier:check
 
       - name: Lint
-        run: npm run lint:check
+        run: yarn lint:check
 
       - name: Type Check
-        run: npm run build
+        run: yarn build
 
       - name: Unit Test
-        run: npm run test
+        run: yarn test

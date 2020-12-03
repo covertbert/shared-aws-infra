@@ -9,5 +9,5 @@ This repo is for my shared AWS infrastructure, written in TypeScript & using the
 Available stacks can be found in `bin/main.ts`.
 
 - `npm install` to install dependencies
-- `npm run synth <stack-name>` to see a simulated output of the specified stack
-- `npm run deploy <stack-name>` to deploy a specific stack
+- `yarn synth <stack-name>` to see a simulated output of the specified stack
+- `yarn deploy <stack-name>` to deploy a specific stack
