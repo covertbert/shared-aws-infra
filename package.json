@@ -1,5 +1,6 @@
 {
   "name": "bertie-blackman-shared-infra",
+  "license": "MIT",
   "version": "0.1.0",
   "bin": {
     "main": "bin/main.ts"
