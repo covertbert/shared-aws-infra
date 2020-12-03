@@ -16,7 +16,7 @@
     "lint:fix": "eslint --fix --ignore-path .gitignore . --ext ts --ext js"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.64.1",
+    "@aws-cdk/assert": "1.76.0",
     "@types/jest": "^26.0.10",
     "@types/node": "14.11.5",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
@@ -34,17 +34,18 @@
     "typescript": "~4.0.3"
   },
   "dependencies": {
-    "@aws-cdk/aws-budgets": "1.64.1",
-    "@aws-cdk/aws-certificatemanager": "1.64.1",
-    "@aws-cdk/aws-cloudfront": "1.64.1",
-    "@aws-cdk/aws-iam": "1.64.1",
-    "@aws-cdk/aws-route53-targets": "^1.64.1",
-    "@aws-cdk/aws-s3": "1.64.1",
-    "@aws-cdk/aws-ses": "1.64.1",
-    "@aws-cdk/aws-ses-actions": "1.64.1",
-    "@aws-cdk/aws-sns": "^1.64.1",
-    "@aws-cdk/aws-sns-subscriptions": "^1.64.1",
-    "@aws-cdk/core": "1.64.1",
+    "@aws-cdk/aws-budgets": "1.76.0",
+    "@aws-cdk/aws-certificatemanager": "1.76.0",
+    "@aws-cdk/aws-cloudfront": "1.76.0",
+    "@aws-cdk/aws-ec2": "1.76.0",
+    "@aws-cdk/aws-iam": "1.76.0",
+    "@aws-cdk/aws-route53-targets": "^1.76.0",
+    "@aws-cdk/aws-s3": "1.76.0",
+    "@aws-cdk/aws-ses": "1.76.0",
+    "@aws-cdk/aws-ses-actions": "1.76.0",
+    "@aws-cdk/aws-sns": "^1.76.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.76.0",
+    "@aws-cdk/core": "1.76.0",
     "source-map-support": "^0.5.16"
   }
 }
