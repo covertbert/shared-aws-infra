@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@master
         with:
           path: node_modules
-          key: v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: NPM Install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -65,7 +65,7 @@ jobs:
         uses: actions/cache@master
         with:
           path: node_modules
-          key: v1-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: NPM Install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -81,7 +81,7 @@ jobs:
 
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
