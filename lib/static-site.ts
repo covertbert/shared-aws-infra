@@ -6,7 +6,15 @@ import {
   CloudFrontWebDistribution,
 } from '@aws-cdk/aws-cloudfront'
 import { PolicyStatement, CanonicalUserPrincipal } from '@aws-cdk/aws-iam'
-import { ARecord, AaaaRecord, RecordTarget, PublicHostedZone } from '@aws-cdk/aws-route53'
+import {
+  ARecord,
+  AaaaRecord,
+  CnameRecord,
+  MxRecord,
+  TxtRecord,
+  RecordTarget,
+  PublicHostedZone,
+} from '@aws-cdk/aws-route53'
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets'
 
 type ExtendedStackProps = StackProps & {
@@ -89,6 +97,45 @@ export class StaticSiteStack extends Stack {
       zone: hostedZone,
       recordName: domainName,
       ttl: Duration.seconds(60),
+    })
+
+    new MxRecord(this, 'FastMailMX', {
+      recordName: domainName,
+      zone: hostedZone,
+      values: [
+        {
+          priority: 10,
+          hostName: 'in1-smtp.messagingengine.com',
+        },
+        {
+          priority: 20,
+          hostName: 'in2-smtp.messagingengine.com',
+        },
+      ],
+    })
+
+    new TxtRecord(this, 'FastMailTXT', {
+      recordName: domainName,
+      zone: hostedZone,
+      values: ['v=spf1 include:spf.messagingengine.com ?all'],
+    })
+
+    new CnameRecord(this, 'FastMailCNAME1', {
+      domainName,
+      zone: hostedZone,
+      recordName: 'fm1.bertie.dev.dkim.fmhosted.com',
+    })
+
+    new CnameRecord(this, 'FastMailCNAME2', {
+      domainName,
+      zone: hostedZone,
+      recordName: 'fm2.bertie.dev.dkim.fmhosted.com',
+    })
+
+    new CnameRecord(this, 'FastMailCNAME3', {
+      domainName,
+      zone: hostedZone,
+      recordName: 'fm3.bertie.dev.dkim.fmhosted.com',
     })
 
     new CfnOutput(this, 'cloudfront-url', {
