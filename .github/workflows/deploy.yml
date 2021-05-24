@@ -69,7 +69,7 @@ jobs:
 
       - name: NPM Install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm i
+        run: yarn
 
       - name: Deploy ${{ matrix.stack }}
         run: yarn deploy ${{ matrix.stack }}
