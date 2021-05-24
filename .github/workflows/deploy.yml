@@ -65,7 +65,7 @@ jobs:
         uses: actions/cache@master
         with:
           path: node_modules
-          key: v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          key: v2-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: NPM Install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
