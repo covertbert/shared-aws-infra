@@ -6,3 +6,4 @@
 .npmignore
 .prettierignore
 cdk.out/*
+yarn.lock
