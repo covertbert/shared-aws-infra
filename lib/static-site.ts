@@ -100,7 +100,7 @@ export class StaticSiteStack extends Stack {
     })
 
     new MxRecord(this, 'FastMailMX', {
-      recordName: `*.${domainName}`,
+      recordName: domainName,
       zone: hostedZone,
       values: [
         {
