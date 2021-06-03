@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register'
 import * as cdk from '@aws-cdk/core'
-import { BudgetsStack, IAMStack, StaticSiteStack, CertificatesStack } from '../lib'
+import { BudgetsStack, IAMStack, StaticSiteStack, CertificatesStack } from '../lib/stacks'
 
 const regions = {
   primary: 'eu-west-2',
