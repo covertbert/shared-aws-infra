@@ -1,15 +1,12 @@
 import { Stack, App, StackProps } from '@aws-cdk/core'
-import { User, Policy, PolicyStatement } from '@aws-cdk/aws-iam'
+import { IamUser } from '../constructs/iam-user'
 
 export class IAMStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    const user = new User(this, 'StackDeploymentUser', {
-      userName: 'StackDeploymentUser',
-    })
-
-    const stackDeploymentStatement = new PolicyStatement({
+    new IamUser(this, 'StackDeployment', {
+      name: 'StackDeploymentUser',
       actions: [
         'cloudformation:*',
         'budgets:*',
@@ -21,13 +18,6 @@ export class IAMStack extends Stack {
         'ses:*',
         'sns:*',
       ],
-      resources: ['*'],
     })
-
-    const policy = new Policy(this, 'StackDeploymentPolicy', {
-      statements: [stackDeploymentStatement],
-    })
-
-    policy.attachToUser(user)
   }
 }
