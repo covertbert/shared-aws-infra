@@ -24,7 +24,7 @@ jobs:
 
       - name: NPM Install
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm i
+        run: yarn
 
       - name: Check Formatting
         run: yarn prettier:check
