@@ -1,6 +1,6 @@
 import { expect as expectCDK, haveResource, haveResourceLike } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
-import { StaticSiteStack } from '../lib'
+import { StaticSiteStack } from './'
 
 describe('StaticSiteStack', () => {
   const stackName = 'test-site'
