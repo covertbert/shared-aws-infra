@@ -9,7 +9,7 @@ describe('IAMStack', () => {
   it('creates a stack deployment IAM user', () => {
     expectCDK(stack).to(
       haveResourceLike('AWS::IAM::User', {
-        UserName: 'StackDeploymentUser',
+        UserName: 'TvShowStackDeploymentUser',
       }),
     )
   })
