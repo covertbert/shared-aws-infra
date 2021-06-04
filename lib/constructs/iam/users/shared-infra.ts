@@ -44,6 +44,11 @@ export class SharedInfraDeploymentIamUser extends Construct {
       resources: ['arn:aws:route53:::hostedzone/*'],
     })
 
+    const iamPolicyStatement = new PolicyStatement({
+      actions: ['iam:CreateRole'],
+      resources: ['arn:aws:iam::515213366596:role/bertie-blackman-*'],
+    })
+
     const policy = new Policy(this, `${name}Policy`, {
       statements: [
         cloudformationPolicyStatement,
@@ -51,6 +56,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
         route53CreatePolicyStatement,
         route53UpdatePolicyStatement,
         cloudfrontPolicyStatement,
+        iamPolicyStatement,
       ],
     })
 
