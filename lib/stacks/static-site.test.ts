@@ -55,28 +55,4 @@ describe('StaticSiteStack', () => {
     )
     expectCDK(stack).to(haveResource('AWS::CloudFront::CloudFrontOriginAccessIdentity'))
   })
-
-  it('creates a hosted zone with the correct records', () => {
-    expectCDK(stack).to(
-      haveResource('AWS::Route53::HostedZone', {
-        Name: `${domainName}.`,
-      }),
-    )
-
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Name: `${fullDomain}.`,
-        Type: 'A',
-      }),
-    )
-
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Name: `${domainName}.`,
-        Type: 'A',
-      }),
-    )
-
-    expectCDK(stack).to(haveResource('AWS::Route53::RecordSet'))
-  })
 })
