@@ -45,7 +45,7 @@ jobs:
 
     strategy:
       matrix:
-        stack: [budgets, certificates, shared-dns, bertie-blackman]
+        stack: [budgets, certificates, bertie-blackman]
     env:
       AWS_REGION: eu-west-2
 

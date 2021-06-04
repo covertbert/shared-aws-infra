@@ -28,13 +28,23 @@ export class SharedInfraDeploymentIamUser extends Construct {
       resources: ['arn:aws:budgets::515213366596:budget/CostBudget'],
     })
 
-    const route53PolicyStatement = new PolicyStatement({
+    const route53CreatePolicyStatement = new PolicyStatement({
       actions: ['route53:CreateHostedZone'],
       resources: ['*'],
     })
 
+    const route53UpdatePolicyStatement = new PolicyStatement({
+      actions: ['route53:*'],
+      resources: ['arn:aws:route53:::hostedzone/Z09743751MALEMV4LE5OD'],
+    })
+
     const policy = new Policy(this, `${name}Policy`, {
-      statements: [cloudformationPolicyStatement, budgetsPolicyStatement, route53PolicyStatement],
+      statements: [
+        cloudformationPolicyStatement,
+        budgetsPolicyStatement,
+        route53CreatePolicyStatement,
+        route53UpdatePolicyStatement,
+      ],
     })
 
     policy.attachToUser(this.user)
