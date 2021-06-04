@@ -6,21 +6,15 @@ import {
   CloudFrontWebDistribution,
 } from '@aws-cdk/aws-cloudfront'
 import { PolicyStatement, CanonicalUserPrincipal } from '@aws-cdk/aws-iam'
-import {
-  ARecord,
-  AaaaRecord,
-  CnameRecord,
-  MxRecord,
-  TxtRecord,
-  RecordTarget,
-  PublicHostedZone,
-} from '@aws-cdk/aws-route53'
+import { ARecord, AaaaRecord, RecordTarget } from '@aws-cdk/aws-route53'
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets'
+import { PublicHostedZone } from '@aws-cdk/aws-route53'
 
 type ExtendedStackProps = StackProps & {
   recordName: string
   domainName: string
   certificateARN: string
+  hostedZone: PublicHostedZone
 }
 export class StaticSiteStack extends Stack {
   constructor(scope: App, id: string, props: ExtendedStackProps) {
@@ -28,7 +22,9 @@ export class StaticSiteStack extends Stack {
 
     const WEBSITE_NAME = id
     const ARTIFACT_BUCKET_NAME = `${WEBSITE_NAME}-artifacts`
-    const { recordName, domainName, certificateARN } = props
+
+    const { recordName, domainName, certificateARN, hostedZone } = props
+
     const fullApexDomain = [recordName, domainName].join('.')
 
     const websiteBucket = new Bucket(this, ARTIFACT_BUCKET_NAME, {
@@ -76,8 +72,6 @@ export class StaticSiteStack extends Stack {
       cloudfrontDistProps,
     )
 
-    const hostedZone = new PublicHostedZone(this, 'BertieDevZone', { zoneName: domainName })
-
     const www = new ARecord(this, 'WWWBertieDevARecord', {
       target: RecordTarget.fromAlias(new CloudFrontTarget(cloudfrontDist)),
       zone: hostedZone,
@@ -97,45 +91,6 @@ export class StaticSiteStack extends Stack {
       zone: hostedZone,
       recordName: domainName,
       ttl: Duration.seconds(60),
-    })
-
-    new MxRecord(this, 'FastMailMX', {
-      recordName: domainName,
-      zone: hostedZone,
-      values: [
-        {
-          priority: 10,
-          hostName: 'in1-smtp.messagingengine.com',
-        },
-        {
-          priority: 20,
-          hostName: 'in2-smtp.messagingengine.com',
-        },
-      ],
-    })
-
-    new TxtRecord(this, 'FastMailTXT', {
-      recordName: domainName,
-      zone: hostedZone,
-      values: ['v=spf1 include:spf.messagingengine.com ?all'],
-    })
-
-    new CnameRecord(this, 'FastMailCNAME1', {
-      domainName,
-      zone: hostedZone,
-      recordName: 'fm1.bertie.dev.dkim.fmhosted.com',
-    })
-
-    new CnameRecord(this, 'FastMailCNAME2', {
-      domainName,
-      zone: hostedZone,
-      recordName: 'fm2.bertie.dev.dkim.fmhosted.com',
-    })
-
-    new CnameRecord(this, 'FastMailCNAME3', {
-      domainName,
-      zone: hostedZone,
-      recordName: 'fm3.bertie.dev.dkim.fmhosted.com',
     })
 
     new CfnOutput(this, 'cloudfront-url', {
