@@ -35,7 +35,7 @@ export class DeploymentGroup extends Construct {
     })
 
     const s3PolicyStatement = new PolicyStatement({
-      actions: ['s3:getBucketLocation', 's3:ListBucket', 's3:*Object'],
+      actions: ['s3:getBucketLocation', 's3:ListBucket', 's3:*Object', 's3:Create*'],
       resources: ['*'],
     })
 
