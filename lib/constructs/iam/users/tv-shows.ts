@@ -20,7 +20,7 @@ export class TvShowsDeploymentIamUser extends Construct {
 
     const cloudformationPolicyStatement = new PolicyStatement({
       actions: ['cloudformation:*'],
-      resources: ['arn:aws:cloudformation:eu-west-2:515213366596:stack/TvShowsLambdaStack/*'],
+      resources: ['arn:aws:cloudformation:eu-west-2:515213366596:stack/tv-shows-lambda-stack/*'],
     })
 
     const iamPolicyStatement = new PolicyStatement({
