@@ -5,6 +5,7 @@ import { DeploymentGroup } from '../constructs/iam/groups/deployment'
 import { AdminIamUser } from '../constructs/iam/users/admin'
 import { TvShowsDeploymentIamUser } from '../constructs/iam/users/tv-shows'
 import { SharedInfraDeploymentIamUser } from '../constructs/iam/users/shared-infra'
+import { BertieBlackmanDeploymentIamUser } from '../constructs/iam/users/bertie-blackman'
 
 export class IAMStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
@@ -20,7 +21,13 @@ export class IAMStack extends Stack {
       'SharedInfraStackDeployment',
     )
 
+    const bertieBlackmanDeploymentUser = new BertieBlackmanDeploymentIamUser(
+      this,
+      'BertieBlackmanStackDeployment',
+    )
+
     deploymentGroup.group.addUser(tvShowsDeploymentUser.user)
     deploymentGroup.group.addUser(sharedInfraDeploymentUser.user)
+    deploymentGroup.group.addUser(bertieBlackmanDeploymentUser.user)
   }
 }
