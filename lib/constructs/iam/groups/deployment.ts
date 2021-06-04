@@ -42,6 +42,7 @@ export class DeploymentGroup extends Construct {
         's3:Create*',
         's3:Set*',
         's3:Put*',
+        's3:Describe*',
       ],
       resources: ['*'],
     })
