@@ -37,7 +37,7 @@ describe('StaticSiteStack', () => {
         PolicyDocument: {
           Statement: [
             {
-              Action: ['s3:GetBucket*', 's3:GetObject*', 's3:List*'],
+              Action: ['s3:GetBucket*', 's3:GetObject*', 's3:List*', 's3:DeleteObject*'],
             },
           ],
         },
