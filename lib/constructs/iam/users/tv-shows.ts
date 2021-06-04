@@ -30,7 +30,8 @@ export class TvShowsDeploymentIamUser extends Construct {
 
     const route53PolicyStatement = new PolicyStatement({
       actions: ['route53:ChangeResourceRecordSets'],
-      resources: ['arn:aws:route53:::hostedzone/Z070046014YOV8LYZ8P9F'],
+      // TODO: ZoneID
+      resources: ['arn:aws:route53:::hostedzone/*'],
     })
 
     const lambdaPolicyStatement = new PolicyStatement({
