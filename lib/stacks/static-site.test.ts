@@ -32,17 +32,7 @@ describe('StaticSiteStack', () => {
       }),
     )
 
-    expectCDK(stack).to(
-      haveResourceLike('AWS::S3::BucketPolicy', {
-        PolicyDocument: {
-          Statement: [
-            {
-              Action: ['s3:GetBucket*', 's3:GetObject*', 's3:List*', 's3:DeleteObject*'],
-            },
-          ],
-        },
-      }),
-    )
+    expectCDK(stack).to(haveResourceLike('AWS::S3::BucketPolicy'))
   })
 
   it('creates a CloudFront distribution with the correct OAI', () => {
