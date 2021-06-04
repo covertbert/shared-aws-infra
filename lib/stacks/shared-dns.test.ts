@@ -1,11 +1,9 @@
-import { expect as expectCDK, haveResource, haveResourceLike } from '@aws-cdk/assert'
+import { expect as expectCDK, haveResource } from '@aws-cdk/assert'
 import * as cdk from '@aws-cdk/core'
 import { SharedDnsStack } from '.'
 
 describe('SharedDnsStack', () => {
-  const recordName = 'www'
   const domainName = 'example.dev'
-  const fullDomain = [recordName, domainName].join('.')
 
   const app = new cdk.App()
 

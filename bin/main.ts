@@ -17,7 +17,7 @@ const regions = {
 const app = new cdk.App()
 
 const sharedDns = new SharedDnsStack(app, 'shared-dns', {
-  env: { region: regions.secondary },
+  env: { region: regions.primary },
   recordName: 'www',
   domainName: 'bertie.dev',
   certificateARN:
