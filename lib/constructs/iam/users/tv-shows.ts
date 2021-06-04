@@ -25,7 +25,7 @@ export class TvShowsDeploymentIamUser extends Construct {
 
     const iamPolicyStatement = new PolicyStatement({
       actions: ['iam:*'],
-      resources: ['arn:aws:iam::515213366596:role/TvShowsLambdaStack*'],
+      resources: ['arn:aws:iam::515213366596:role/tv-shows-lambda-stack-*'],
     })
 
     const route53PolicyStatement = new PolicyStatement({
@@ -48,7 +48,7 @@ export class TvShowsDeploymentIamUser extends Construct {
 
     const eventsPolicyStatement = new PolicyStatement({
       actions: ['events:*'],
-      resources: ['arn:aws:events:eu-west-2:515213366596:rule/TvShowsLambdaStack-*'],
+      resources: ['arn:aws:events:eu-west-2:515213366596:rule/tv-shows-lambda-stack-*'],
     })
 
     const policy = new Policy(this, `${name}Policy`, {
