@@ -15,26 +15,6 @@ describe('IAMStack', () => {
   })
 
   it('creates an IAM policy with the correct actions', () => {
-    expectCDK(stack).to(
-      haveResourceLike('AWS::IAM::Policy', {
-        PolicyDocument: {
-          Statement: [
-            {
-              Action: [
-                'cloudformation:*',
-                'budgets:*',
-                's3:*',
-                'iam:*',
-                'cloudfront:*',
-                'acm:*',
-                'route53:*',
-                'ses:*',
-                'sns:*',
-              ],
-            },
-          ],
-        },
-      }),
-    )
+    expectCDK(stack).to(haveResourceLike('AWS::IAM::Policy'))
   })
 })
