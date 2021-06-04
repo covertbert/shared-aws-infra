@@ -34,7 +34,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
     })
 
     const cloudfrontPolicyStatement = new PolicyStatement({
-      actions: ['cloudfront:CreateCloudFrontOriginAccessIdentity'],
+      actions: ['cloudfront:*'],
       resources: ['*'],
     })
 
@@ -48,6 +48,11 @@ export class SharedInfraDeploymentIamUser extends Construct {
       resources: ['arn:aws:iam::515213366596:role/bertie-blackman-*'],
     })
 
+    const lambdaPolicyStatement = new PolicyStatement({
+      actions: ['lambda:*'],
+      resources: ['arn:aws:lambda:eu-west-2:515213366596:function:bertie-blackman-*'],
+    })
+
     const policy = new Policy(this, `${name}Policy`, {
       statements: [
         cloudformationPolicyStatement,
@@ -56,6 +61,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
         route53UpdatePolicyStatement,
         cloudfrontPolicyStatement,
         iamPolicyStatement,
+        lambdaPolicyStatement,
       ],
     })
 
