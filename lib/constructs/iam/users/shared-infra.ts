@@ -33,6 +33,11 @@ export class SharedInfraDeploymentIamUser extends Construct {
       resources: ['*'],
     })
 
+    const cloudfrontPolicyStatement = new PolicyStatement({
+      actions: ['cloudfront:CreateCloudFrontOriginAccessIdentity'],
+      resources: ['*'],
+    })
+
     const route53UpdatePolicyStatement = new PolicyStatement({
       actions: ['route53:*'],
       // TODO: ZoneID
@@ -45,6 +50,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
         budgetsPolicyStatement,
         route53CreatePolicyStatement,
         route53UpdatePolicyStatement,
+        cloudfrontPolicyStatement,
       ],
     })
 
