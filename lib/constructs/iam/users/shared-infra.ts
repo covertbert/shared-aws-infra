@@ -22,8 +22,13 @@ export class SharedInfraDeploymentIamUser extends Construct {
       ],
     })
 
+    const budgetsPolicyStatement = new PolicyStatement({
+      actions: ['budgets:*'],
+      resources: ['arn:aws:budgets::515213366596:budget/CostBudget'],
+    })
+
     const policy = new Policy(this, `${name}Policy`, {
-      statements: [cloudformationPolicyStatement],
+      statements: [cloudformationPolicyStatement, budgetsPolicyStatement],
     })
 
     policy.attachToUser(this.user)
