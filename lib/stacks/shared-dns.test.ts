@@ -23,20 +23,6 @@ describe('SharedDnsStack', () => {
       }),
     )
 
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Name: `${fullDomain}.`,
-        Type: 'A',
-      }),
-    )
-
-    expectCDK(stack).to(
-      haveResourceLike('AWS::Route53::RecordSet', {
-        Name: `${domainName}.`,
-        Type: 'A',
-      }),
-    )
-
     expectCDK(stack).to(haveResource('AWS::Route53::RecordSet'))
   })
 })

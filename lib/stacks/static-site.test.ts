@@ -55,4 +55,18 @@ describe('StaticSiteStack', () => {
     )
     expectCDK(stack).to(haveResource('AWS::CloudFront::CloudFrontOriginAccessIdentity'))
   })
+
+  expectCDK(stack).to(
+    haveResourceLike('AWS::Route53::RecordSet', {
+      Name: `${fullDomain}.`,
+      Type: 'A',
+    }),
+  )
+
+  expectCDK(stack).to(
+    haveResourceLike('AWS::Route53::RecordSet', {
+      Name: `${domainName}.`,
+      Type: 'A',
+    }),
+  )
 })
