@@ -34,6 +34,7 @@ export class StaticSiteStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
+      autoDeleteObjects: true,
     })
 
     const cloudfrontOAI = new OriginAccessIdentity(this, 'OAI', {
