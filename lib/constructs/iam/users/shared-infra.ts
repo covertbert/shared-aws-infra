@@ -45,7 +45,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
     })
 
     const iamPolicyStatement = new PolicyStatement({
-      actions: ['iam:CreateRole'],
+      actions: ['iam:*'],
       resources: ['arn:aws:iam::515213366596:role/bertie-blackman-*'],
     })
 
