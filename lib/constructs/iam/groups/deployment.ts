@@ -11,7 +11,7 @@ export class DeploymentGroup extends Construct {
 
     const toolkitCloudformationPolicyStatement = new PolicyStatement({
       actions: ['cloudformation:Describe*'],
-      resources: ['arn:aws:cloudformation:eu-west-2:515213366596:stack/CDKToolkit/*'],
+      resources: ['*'],
     })
 
     const route53PolicyStatement = new PolicyStatement({

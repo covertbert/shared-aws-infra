@@ -18,7 +18,7 @@ export class TvShowsDeploymentIamUser extends Construct {
       resources: ['*'],
     })
 
-    const tvShowsCloudformationPolicyStatement = new PolicyStatement({
+    const cloudformationPolicyStatement = new PolicyStatement({
       actions: ['cloudformation:*'],
       resources: ['arn:aws:cloudformation:eu-west-2:515213366596:stack/TvShowsLambdaStack/*'],
     })
@@ -54,7 +54,7 @@ export class TvShowsDeploymentIamUser extends Construct {
     const policy = new Policy(this, `${name}Policy`, {
       statements: [
         apiGatewayPolicyStatement,
-        tvShowsCloudformationPolicyStatement,
+        cloudformationPolicyStatement,
         iamPolicyStatement,
         route53PolicyStatement,
         lambdaPolicyStatement,

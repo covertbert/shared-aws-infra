@@ -1,5 +1,5 @@
 import { Construct } from '@aws-cdk/core'
-import { User, Policy } from '@aws-cdk/aws-iam'
+import { User, Policy, PolicyStatement } from '@aws-cdk/aws-iam'
 
 export class SharedInfraDeploymentIamUser extends Construct {
   public readonly user: User
@@ -13,8 +13,17 @@ export class SharedInfraDeploymentIamUser extends Construct {
       userName: name,
     })
 
+    const cloudformationPolicyStatement = new PolicyStatement({
+      actions: ['cloudformation:*'],
+      resources: [
+        'arn:aws:cloudformation:eu-west-2:515213366596:stack/bertie-blackman/*',
+        'arn:aws:cloudformation:eu-west-2:515213366596:stack/certificates/*',
+        'arn:aws:cloudformation:eu-west-2:515213366596:stack/budgets/*',
+      ],
+    })
+
     const policy = new Policy(this, `${name}Policy`, {
-      statements: [],
+      statements: [cloudformationPolicyStatement],
     })
 
     policy.attachToUser(this.user)
