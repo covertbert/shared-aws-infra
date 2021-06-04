@@ -19,6 +19,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
         'arn:aws:cloudformation:eu-west-2:515213366596:stack/bertie-blackman/*',
         'arn:aws:cloudformation:us-east-1:515213366596:stack/certificates/*',
         'arn:aws:cloudformation:eu-west-2:515213366596:stack/budgets/*',
+        'arn:aws:cloudformation:eu-west-2:515213366596:stack/shared-dns/*',
       ],
     })
 
