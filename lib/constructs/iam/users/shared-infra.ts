@@ -40,8 +40,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
 
     const route53UpdatePolicyStatement = new PolicyStatement({
       actions: ['route53:*'],
-      // TODO: ZoneID
-      resources: ['arn:aws:route53:::hostedzone/*'],
+      resources: ['arn:aws:route53:::hostedzone/Z071345722DA6HTUYZ248'],
     })
 
     const iamPolicyStatement = new PolicyStatement({
