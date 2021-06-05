@@ -6,7 +6,7 @@ This repo is for my shared AWS infrastructure, written in TypeScript & using the
 
 ## Getting started
 
-Available stacks can be found in `bin/main.ts`.
+Available stacks can be found in `bin/cdk.ts`.
 
 - `npm install` to install dependencies
 - `yarn synth <stack-name>` to see a simulated output of the specified stack
