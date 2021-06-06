@@ -20,7 +20,10 @@ export class BertieBlackmanDeploymentIamUser extends Construct {
 
     const lambdaPolicyStatement = new PolicyStatement({
       actions: ['lambda:*'],
-      resources: ['arn:aws:lambda:eu-west-2:515213366596:function:bertie-blackman-*'],
+      resources: [
+        'arn:aws:lambda:eu-west-2:515213366596:function:bertie-blackman-*',
+        'arn:aws:lambda:eu-west-2:515213366596:layer:deployStaticWebsiteAwsCliLayer*',
+      ],
     })
 
     const iamPolicyStatement = new PolicyStatement({
@@ -30,7 +33,17 @@ export class BertieBlackmanDeploymentIamUser extends Construct {
 
     const cloudfrontPolicyStatement = new PolicyStatement({
       actions: ['cloudfront:*'],
-      resources: ['arn:aws:cloudfront::515213366596:distribution/*'],
+      resources: ['*'],
+    })
+
+    const s3PolicyStatement = new PolicyStatement({
+      actions: ['s3:*'],
+      resources: ['arn:aws:s3:::bertie-blackman-artifacts'],
+    })
+
+    const route53PolicyStatement = new PolicyStatement({
+      actions: ['route53:ChangeResourceRecordSets'],
+      resources: ['arn:aws:route53:::hostedzone/Z071345722DA6HTUYZ248'],
     })
 
     const policy = new Policy(this, `${name}Policy`, {
@@ -39,6 +52,8 @@ export class BertieBlackmanDeploymentIamUser extends Construct {
         lambdaPolicyStatement,
         iamPolicyStatement,
         cloudfrontPolicyStatement,
+        s3PolicyStatement,
+        route53PolicyStatement,
       ],
     })
 
