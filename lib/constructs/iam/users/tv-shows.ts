@@ -1,11 +1,17 @@
 import { Construct } from '@aws-cdk/core'
 import { User, Policy, PolicyStatement } from '@aws-cdk/aws-iam'
 
+interface Props {
+  route53ZoneId: string
+}
+
 export class TvShowsDeploymentIamUser extends Construct {
   public readonly user: User
 
-  constructor(scope: Construct, id: string) {
+  constructor(scope: Construct, id: string, props: Props) {
     super(scope, id)
+
+    const { route53ZoneId } = props
 
     const name = 'TvShowStackDeploymentUser'
 
@@ -30,7 +36,7 @@ export class TvShowsDeploymentIamUser extends Construct {
 
     const route53PolicyStatement = new PolicyStatement({
       actions: ['route53:ChangeResourceRecordSets'],
-      resources: ['arn:aws:route53:::hostedzone/Z071345722DA6HTUYZ248'],
+      resources: [`arn:aws:route53:::hostedzone/${route53ZoneId}`],
     })
 
     const lambdaPolicyStatement = new PolicyStatement({

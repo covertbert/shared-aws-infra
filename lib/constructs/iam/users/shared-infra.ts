@@ -1,11 +1,17 @@
 import { Construct } from '@aws-cdk/core'
 import { User, Policy, PolicyStatement } from '@aws-cdk/aws-iam'
 
+interface Props {
+  route53ZoneId: string
+}
+
 export class SharedInfraDeploymentIamUser extends Construct {
   public readonly user: User
 
-  constructor(scope: Construct, id: string) {
+  constructor(scope: Construct, id: string, props: Props) {
     super(scope, id)
+
+    const { route53ZoneId } = props
 
     const name = 'SharedInfraStackDeploymentUser'
 
@@ -34,7 +40,7 @@ export class SharedInfraDeploymentIamUser extends Construct {
 
     const route53UpdatePolicyStatement = new PolicyStatement({
       actions: ['route53:*'],
-      resources: ['arn:aws:route53:::hostedzone/Z071345722DA6HTUYZ248'],
+      resources: [`arn:aws:route53:::hostedzone/${route53ZoneId}`],
     })
 
     const policy = new Policy(this, `${name}Policy`, {
