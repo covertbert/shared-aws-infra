@@ -16,7 +16,6 @@ export class SharedInfraDeploymentIamUser extends Construct {
     const cloudformationPolicyStatement = new PolicyStatement({
       actions: ['cloudformation:*'],
       resources: [
-        'arn:aws:cloudformation:eu-west-2:515213366596:stack/bertie-blackman/*',
         'arn:aws:cloudformation:us-east-1:515213366596:stack/certificates/*',
         'arn:aws:cloudformation:eu-west-2:515213366596:stack/budgets/*',
         'arn:aws:cloudformation:eu-west-2:515213366596:stack/shared-dns/*',
@@ -33,24 +32,9 @@ export class SharedInfraDeploymentIamUser extends Construct {
       resources: ['*'],
     })
 
-    const cloudfrontPolicyStatement = new PolicyStatement({
-      actions: ['cloudfront:*'],
-      resources: ['*'],
-    })
-
     const route53UpdatePolicyStatement = new PolicyStatement({
       actions: ['route53:*'],
       resources: ['arn:aws:route53:::hostedzone/Z071345722DA6HTUYZ248'],
-    })
-
-    const iamPolicyStatement = new PolicyStatement({
-      actions: ['iam:*'],
-      resources: ['arn:aws:iam::515213366596:role/bertie-blackman-*'],
-    })
-
-    const lambdaPolicyStatement = new PolicyStatement({
-      actions: ['lambda:*'],
-      resources: ['arn:aws:lambda:eu-west-2:515213366596:function:bertie-blackman-*'],
     })
 
     const policy = new Policy(this, `${name}Policy`, {
@@ -59,9 +43,6 @@ export class SharedInfraDeploymentIamUser extends Construct {
         budgetsPolicyStatement,
         route53CreatePolicyStatement,
         route53UpdatePolicyStatement,
-        cloudfrontPolicyStatement,
-        iamPolicyStatement,
-        lambdaPolicyStatement,
       ],
     })
 
