@@ -145,4 +145,48 @@ describe('IAMStack', () => {
       )
     })
   })
+
+  describe('Deployment Group', () => {
+    it('has an IAM Group', () => {
+      expectCDK(stack).to(
+        haveResourceLike('AWS::IAM::Group', {
+          GroupName: 'DeploymentGroup',
+        }),
+      )
+    })
+
+    it('has an IAM policy with the correct actions', () => {
+      expectCDK(stack).to(
+        haveResourceLike('AWS::IAM::Policy', {
+          PolicyDocument: {
+            Statement: [
+              objectLike({ Action: 'cloudformation:Describe*' }),
+              objectLike({ Action: ['route53:List*', 'route53:Get*'] }),
+              objectLike({ Action: 'events:Describe*' }),
+              objectLike({ Action: 'logs:*' }),
+              objectLike({ Action: 'acm:*Certificate' }),
+              objectLike({
+                Action: [
+                  's3:getBucketLocation',
+                  's3:ListBucket',
+                  's3:*Object',
+                  's3:Create*',
+                  's3:Set*',
+                  's3:Put*',
+                  's3:Describe*',
+                ],
+              }),
+            ],
+            Version: '2012-10-17',
+          },
+          PolicyName: stringLike('DeploymentGroup*'),
+          Groups: [
+            {
+              Ref: stringLike('DeploymentGroup*'),
+            },
+          ],
+        }),
+      )
+    })
+  })
 })
