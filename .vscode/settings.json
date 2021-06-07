@@ -1,4 +1,11 @@
 {
   "typescript.tsdk": "/Users/bertieblackman/Projects/personal/bertie-blackman-shared-aws-infra/node_modules/typescript/lib",
-  "cSpell.words": ["HTUYZ", "cdktoolkit", "hostedzone", "stagingbucket"]
+  "cSpell.words": [
+    "HTUYZ",
+    "cdktoolkit",
+    "fmhosted",
+    "hostedzone",
+    "messagingengine",
+    "stagingbucket"
+  ]
 }
