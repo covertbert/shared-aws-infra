@@ -20,10 +20,10 @@
   "devDependencies": {
     "@aws-cdk/assert": "1.107.0",
     "@types/jest": "^27.0.1",
-    "@types/node": "16.9.1",
+    "@types/node": "16.9.4",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "aws-cdk": "1.107.0",
-    "@typescript-eslint/parser": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.2",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^4.0.0",
