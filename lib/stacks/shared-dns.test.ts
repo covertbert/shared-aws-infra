@@ -53,7 +53,7 @@ describe('SharedDnsStack', () => {
         HostedZoneId: {
           Ref: stringLike('BertieDevZone*'),
         },
-        ResourceRecords: ['bertie.dev'],
+        ResourceRecords: ['fm1._domainkey'],
         TTL: '1800',
       }),
     )
@@ -65,7 +65,7 @@ describe('SharedDnsStack', () => {
         HostedZoneId: {
           Ref: stringLike('BertieDevZone*'),
         },
-        ResourceRecords: ['bertie.dev'],
+        ResourceRecords: ['fm2._domainkey'],
         TTL: '1800',
       }),
     )
@@ -77,7 +77,7 @@ describe('SharedDnsStack', () => {
         HostedZoneId: {
           Ref: stringLike('BertieDevZone*'),
         },
-        ResourceRecords: ['bertie.dev'],
+        ResourceRecords: ['fm3._domainkey'],
         TTL: '1800',
       }),
     )
