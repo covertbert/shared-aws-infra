@@ -30,21 +30,21 @@ export class SharedDnsStack extends Stack {
     })
 
     new CnameRecord(this, 'FastMailCNAME1', {
-      domainName: 'fm1._domainkey',
+      domainName: 'fm1.bertie.dev.dkim.fmhosted.com',
       zone: hostedZone,
-      recordName: 'fm1.bertie.dev.dkim.fmhosted.com',
+      recordName: 'fm1._domainkey',
     })
 
     new CnameRecord(this, 'FastMailCNAME2', {
-      domainName: 'fm2._domainkey',
+      domainName: 'fm2.bertie.dev.dkim.fmhosted.com',
       zone: hostedZone,
-      recordName: 'fm2.bertie.dev.dkim.fmhosted.com',
+      recordName: 'fm2._domainkey',
     })
 
     new CnameRecord(this, 'FastMailCNAME3', {
-      domainName: 'fm3._domainkey',
+      domainName: 'fm3.bertie.dev.dkim.fmhosted.com',
       zone: hostedZone,
-      recordName: 'fm3.bertie.dev.dkim.fmhosted.com',
+      recordName: 'fm3._domainkey',
     })
   }
 }

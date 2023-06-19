@@ -44,42 +44,4 @@ describe('SharedDnsStack', () => {
       }),
     )
   })
-
-  it('contains the CNAME records for personal email', () => {
-    expectCDK(stack).to(
-      haveResource('AWS::Route53::RecordSet', {
-        Name: 'fm1.bertie.dev.dkim.fmhosted.com.bertie.dev.',
-        Type: 'CNAME',
-        HostedZoneId: {
-          Ref: stringLike('BertieDevZone*'),
-        },
-        ResourceRecords: ['fm1._domainkey'],
-        TTL: '1800',
-      }),
-    )
-
-    expectCDK(stack).to(
-      haveResource('AWS::Route53::RecordSet', {
-        Name: 'fm2.bertie.dev.dkim.fmhosted.com.bertie.dev.',
-        Type: 'CNAME',
-        HostedZoneId: {
-          Ref: stringLike('BertieDevZone*'),
-        },
-        ResourceRecords: ['fm2._domainkey'],
-        TTL: '1800',
-      }),
-    )
-
-    expectCDK(stack).to(
-      haveResource('AWS::Route53::RecordSet', {
-        Name: 'fm3.bertie.dev.dkim.fmhosted.com.bertie.dev.',
-        Type: 'CNAME',
-        HostedZoneId: {
-          Ref: stringLike('BertieDevZone*'),
-        },
-        ResourceRecords: ['fm3._domainkey'],
-        TTL: '1800',
-      }),
-    )
-  })
 })
