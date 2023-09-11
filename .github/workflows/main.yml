@@ -45,7 +45,7 @@ jobs:
 
     strategy:
       matrix:
-        stack: [budgets, certificates, shared-dns]
+        stack: [budgets, certificates, shared-dns, iam]
     env:
       AWS_REGION: eu-west-2
 
