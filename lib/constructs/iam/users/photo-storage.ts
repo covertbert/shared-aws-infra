@@ -15,7 +15,7 @@ export class S3PhotoStorageIamUser extends Construct {
 
     const route53UpdatePolicyStatement = new PolicyStatement({
       actions: ['s3:*'],
-      resources: ['arn:aws:s3:::bertie-blackman-photo-storage/*'],
+      resources: ['arn:aws:s3:::bertie-blackman-photo-storage'],
     })
 
     const policy = new Policy(this, `${name}Policy`, {
