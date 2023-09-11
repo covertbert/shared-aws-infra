@@ -6,6 +6,7 @@ import { AdminIamUser } from '../constructs/iam/users/admin'
 import { TvShowsDeploymentIamUser } from '../constructs/iam/users/tv-shows'
 import { SharedInfraDeploymentIamUser } from '../constructs/iam/users/shared-infra'
 import { BertieBlackmanDeploymentIamUser } from '../constructs/iam/users/bertie-blackman'
+import { S3PhotoStorageIamUser } from '../constructs/iam/users/photo-storage'
 
 export class IAMStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
@@ -32,6 +33,8 @@ export class IAMStack extends Stack {
       'BertieBlackmanStackDeployment',
       { route53ZoneId },
     )
+
+    new S3PhotoStorageIamUser(this, 'S3PhotoStorageIamUser')
 
     deploymentGroup.group.addUser(tvShowsDeploymentUser.user)
     deploymentGroup.group.addUser(sharedInfraDeploymentUser.user)
