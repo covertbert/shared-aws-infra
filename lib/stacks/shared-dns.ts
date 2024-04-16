@@ -46,7 +46,7 @@ export class SharedDnsStack extends Stack {
       zone: hostedZone,
       recordName: 'fm3._domainkey',
     })
-    
+
     new CnameRecord(this, 'NabuCasaHABertie', {
       domainName: 'pqdnaszz5h9xgntfeyanoffkag7pfkza.ui.nabu.casa',
       zone: hostedZone,
